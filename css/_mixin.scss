@@ -1,40 +1,64 @@
-
-//Fonts
-@mixin font-source-sans($size: false, $colour: false, $weight: false,  $lh: false) {
-  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-  @if $size { font-size: $size; }
-  @if $colour { color: $colour; }
-  @if $weight { font-weight: $weight; }
-  @if $lh { line-height: $lh; }
+//Center block
+@mixin push--auto {
+  margin: {
+    left: auto;
+    right: auto;
+  }
 }
 
-//CSS triangles
-@mixin css-triangle($color, $direction, $size: 6px, $position: absolute, $round: false){
-  @include pseudo($pos: $position);
-  width: 0;
-  height: 0;
-  @if $round {
-    border-radius: 3px;
-  }
-  @if $direction == down {
-    border-left: $size solid transparent;
-    border-right: $size solid transparent;
-    border-top: $size solid $color;
-    margin-top: 0 - round( $size / 2.5 );
-  } @else if $direction == up {
-    border-left: $size solid transparent;
-    border-right: $size solid transparent;
-    border-bottom: $size solid $color;
-    margin-bottom: 0 - round( $size / 2.5 );
-  } @else if $direction == right {
-    border-top: $size solid transparent;
-    border-bottom: $size solid transparent;
-    border-left: $size solid $color;
-    margin-right: -$size;
-  } @else if  $direction == left {
-    border-top: $size solid transparent;
-    border-bottom: $size solid transparent;
-    border-right: $size solid $color;
-    margin-left: -$size;
-  }
+//Border-radius
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+//Border-radius around data
+@mixin border-radius--big($topleft, $topright, $bottomright, $bottomleft) {
+  border-top-left-radius: $topleft;
+  border-top-right-radius: $topright;
+  border-bottom-right-radius: $bottomright;
+  border-bottom-left-radius: $bottomleft;
+  -webkit-border-top-left-radius: $topleft;
+  -webkit-border-top-right-radius: $topright;
+  -webkit-border-bottom-right-radius: $bottomright;
+  -webkit-border-bottom-left-radius: $bottomleft;
+  -moz-border-radius-topleft: $topleft;
+  -moz-border-radius-topright: $topright;
+  -moz-border-radius-bottomright: $bottomright;
+  -moz-border-radius-bottomleft: $bottomleft;
+}
+
+//Gradient
+@mixin gradient($color1, $color2) {
+  background-color: $color1;
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#{$color1}, endColorstr=#{$color2});
+  background-image: -moz-linear-gradient(center top, $color1, $color2);
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to($color2));
+}
+
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+// translate
+@mixin translate ($x, $y) {
+  @include transform(translate($x, $y));
+}
+// skew
+@mixin skew ($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
 }
