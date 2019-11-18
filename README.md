@@ -1,1 +1,1 @@
-#My front-end-kit
+#My front-end-kit for rapid-development
